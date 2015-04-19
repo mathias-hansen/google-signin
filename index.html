@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="import" href="/bower_components/google-signin/google-signin.html" />
+</head>
+<body>
+<google-signin clientId="964722676289-q2tuc37ssasse4agvv9o7us3e8bkvrn4.apps.googleusercontent.com"></google-signin>
+
+
+<div id="user" hidden>
+	<img/>
+	<p class="email"></p>
+	<p class="name"></p>
+</div>
+
+<google-signin clientId="964722676289-q2tuc37ssasse4agvv9o7us3e8bkvrn4.apps.googleusercontent.com" hidden></google-signin>
+
+<script>
+	var signin = document.querySelectorAll("google-signin"),
+		elUser = document.getElementById("user");
+
+	document.addEventListener("google-signin-success", function(event){
+		var user = {
+				"name": event.detail.user.B.ha,
+				"email": event.detail.user.B.B,
+				"image": event.detail.user.B.wc
+			};
+
+		signin[0].setAttribute("hidden", "");
+		signin[1].removeAttribute("hidden");
+		
+		elUser.removeAttribute("hidden");
+
+		elUser.querySelector("img").src = user.image;
+		elUser.querySelector(".email").innerHTML = user.email;
+		elUser.querySelector(".name").innerHTML = user.name;
+	});
+
+	document.addEventListener("google-signed-out", function(event){
+		signin[1].setAttribute("hidden", "");
+		signin[0].removeAttribute("hidden");
+		elUser.setAttribute("hidden", "");
+	});
+</script>
+</body>
+</html>
