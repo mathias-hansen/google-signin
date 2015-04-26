@@ -20,7 +20,7 @@
 	var signin = document.querySelectorAll("google-signin"),
 		elUser = document.getElementById("user");
 
-	document.addEventListener("google-signin-success", function(event){
+	signin[0].addEventListener("google-signin-success", function(event){
 		var user = {
 				"name": event.detail.user.B.ha,
 				"email": event.detail.user.B.B,
